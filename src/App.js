@@ -1,21 +1,22 @@
+import React from 'react';
+import { useEffect } from 'react';
 import './App.css';
+// API KEY : eafb9c33
 
-const Person = () => {
-	return (
-		<>
-			<h1>Name : John</h1>
-			<h2>Last Name : Doe</h2>
-			<h2>Age : 30</h2>
-		</>
-	);
-};
+const API_URL = 'http://www.omdbapi.com/?i=tt3896198&apikey=eafb9c33';
 
 const App = () => {
-	return (
-		<div className='App'>
-			<Person />
-		</div>
-	);
+	const searchMovies = async title => {
+		const response = await fetch(`${API_URL}&s=${title}`);
+		const data = await response.json();
+		console.log(data.Search);
+	};
+
+	useEffect(() => {
+		searchMovies('Superman');
+	}, []);
+
+	return <h1>App</h1>;
 };
 
 export default App;
